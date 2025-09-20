@@ -34,7 +34,7 @@ RSpec.configure do |config|
   config.include FaradaySpecHelper
 
   # Load support files if present
-  Dir[File.join(__dir__, "support", "**", "*.rb")].sort.each { |f| require f }
+  Dir[File.join(__dir__, "support", "**", "*.rb")].each { |f| require f }
 end
 
 # Require the gem's main file

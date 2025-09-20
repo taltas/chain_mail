@@ -10,9 +10,9 @@ gem "rspec", "~> 3.0"
 gem "rubocop", "~> 1.21"
 
 group :test do
-  gem "webmock", "~> 3.0"
-  gem "faraday", "~> 2.0"
   gem "aws-sdk-ses", "~> 1.0"
-  gem "rails"
   gem "byebug"
+  gem "faraday", "~> 2.0"
+  gem "rails"
+  gem "webmock", "~> 3.0"
 end

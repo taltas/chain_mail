@@ -11,9 +11,9 @@ module ChainMail
     def deliver!(mail)
       validate_mail!(mail)
       results = try_providers(mail)
-      if results.none? { |r| r[:success] }
-        handle_delivery_errors(mail, results)
-      end      
+      return unless results.none? { |r| r[:success] }
+
+      handle_delivery_errors(mail, results)
     end
 
     private
@@ -31,32 +31,42 @@ module ChainMail
       ChainMail.config.providers.each do |provider|
         results.concat(try_single_provider(mail, provider))
         # Stop trying more providers if one is successful.
-        if results.any? { |r| r[:success] }
-          return results
-        end
+        return results if results.any? { |r| r[:success] }
       end
       results
     end
 
     def try_single_provider(mail, provider)
       name, creds = provider.first
-      unless creds.is_a?(Hash)
-        return [{ provider: name, error: "Credentials must be a hash", response: nil }]
-      end
+      return invalid_credentials_result(name) unless creds.is_a?(Hash)
 
       begin
         result = provider_class(name).deliver(mail, creds)
-        if result[:success]
-          Rails.logger.info("[ChainMail] Email sent via #{name}")
-          [{ provider: name, success: true, error: nil, response: result[:response] }]
-        else
-          Rails.logger.error("[ChainMail] Provider #{name} failed: #{result[:error]}")
-          [{ provider: name, error: result[:error], response: result[:response] }]
-        end
+        return success_result(name, result) if result[:success]
+
+        error_result(name, result)
       rescue StandardError => e
-        Rails.logger.error("[ChainMail] Provider #{name} raised: #{e.message}")
-        [{ provider: name, error: e.message, response: nil }]
+        exception_result(name, e)
       end
+    end
+
+    def invalid_credentials_result(name)
+      [{ provider: name, error: "Credentials must be a hash", response: nil }]
+    end
+
+    def success_result(name, result)
+      Rails.logger.info("[ChainMail] Email sent via #{name}")
+      [{ provider: name, success: true, error: nil, response: result[:response] }]
+    end
+
+    def error_result(name, result)
+      Rails.logger.error("[ChainMail] Provider #{name} failed: #{result[:error]}")
+      [{ provider: name, error: result[:error], response: result[:response] }]
+    end
+
+    def exception_result(name, exception)
+      Rails.logger.error("[ChainMail] Provider #{name} raised: #{exception.message}")
+      [{ provider: name, error: exception.message, response: nil }]
     end
 
     def handle_delivery_errors(mail, errors)

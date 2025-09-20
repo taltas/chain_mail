@@ -30,11 +30,12 @@ RSpec.describe ChainMail::Delivery do
         { "provider1" => { api_key: "key1" } }
       ]
       allow(ChainMail).to receive(:provider_registry).and_return({
-        provider1: provider1_double
-      })
+                                                                   provider1: provider1_double
+                                                                 })
 
       expect(provider1_double).to receive(:deliver).with(mail, { api_key: "key1" })
-        .and_return({ success: true, error: nil, response: "ok" })
+                                                   .and_return({ success: true, error: nil,
+                                                                 response: "ok" })
 
       ChainMail::Delivery.new.deliver!(mail)
     end
@@ -47,20 +48,27 @@ RSpec.describe ChainMail::Delivery do
         { "provider2" => { api_key: "key2" } }
       ]
       allow(ChainMail).to receive(:provider_registry).and_return({
-        provider1: provider1_double,
-        provider2: provider2_double
-      })
+                                                                   provider1: provider1_double,
+                                                                   provider2: provider2_double
+                                                                 })
 
-      expect(provider1_double).to receive(:deliver).with(mail, { api_key: "key1" }).and_raise(StandardError.new("fail"))
+      expect(provider1_double).to receive(:deliver).with(mail,
+                                                         { api_key: "key1" })
+                                                   .and_raise(
+                                                     StandardError.new("fail")
+                                                   )
       expect(provider2_double).to receive(:deliver).with(mail, { api_key: "key2" })
-        .and_return({ success: true, error: nil, response: "ok" })
-
+                                                   .and_return({ success: true, error: nil,
+                                                                 response: "ok" })
 
       ChainMail::Delivery.new.deliver!(mail)
 
       # Now simulate failover and expect provider2_double to receive deliver
-      # allow(provider1_double).to receive(:deliver).with(mail, { api_key: "key1" }).and_raise(StandardError.new("fail"))
-      # expect(provider2_double).to receive(:deliver).and_return({ success: true, error: nil, response: "ok" })
+      # allow(provider1_double).to receive(:deliver)
+      #   .with(mail, { api_key: "key1" })
+      #   .and_raise(StandardError.new("fail"))
+      # expect(provider2_double).to receive(:deliver)
+      #   .and_return({ success: true, error: nil, response: "ok" })
 
       # ChainMail::Delivery.new.deliver!(mail)
     end
@@ -73,12 +81,20 @@ RSpec.describe ChainMail::Delivery do
         { "provider2" => { api_key: "key2" } }
       ]
       allow(ChainMail).to receive(:provider_registry).and_return({
-        provider1: provider1_double,
-        provider2: provider2_double
-      })
+                                                                   provider1: provider1_double,
+                                                                   provider2: provider2_double
+                                                                 })
 
-      expect(provider1_double).to receive(:deliver).with(mail, { api_key: "key1" }).and_raise(StandardError.new("fail1"))
-      expect(provider2_double).to receive(:deliver).with(mail, { api_key: "key2" }).and_raise(StandardError.new("fail2"))
+      expect(provider1_double).to receive(:deliver).with(mail,
+                                                         { api_key: "key1" })
+                                                   .and_raise(
+                                                     StandardError.new("fail1")
+                                                   )
+      expect(provider2_double).to receive(:deliver).with(mail,
+                                                         { api_key: "key2" })
+                                                   .and_raise(
+                                                     StandardError.new("fail2")
+                                                   )
 
       expect do
         ChainMail::Delivery.new.deliver!(mail)

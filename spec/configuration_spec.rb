@@ -46,10 +46,12 @@ RSpec.describe ChainMail::Configuration do
       mailgun_adapter = class_double("ChainMail::Providers::Mailgun").as_stubbed_const
 
       expect(sendgrid_adapter).to receive(:deliver).with(mail,
-                                                         { api_key: "SG-KEY" }).and_return({ success: true })
+                                                         { api_key: "SG-KEY" })
+                                                   .and_return({ success: true })
       expect(mailgun_adapter).to receive(:deliver).with(mail,
                                                         { domain: "mg.example.com",
-                                                          api_key: "MG-KEY" }).and_return({ success: true })
+                                                          api_key: "MG-KEY" })
+                                                  .and_return({ success: true })
 
       ChainMail.config.providers.each do |provider|
         name, creds = provider.first

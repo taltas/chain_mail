@@ -40,7 +40,11 @@ RSpec.describe ChainMail::Providers::Postmark do
         body: expected_payload.to_json,
         headers: expected_headers
       )
-      .to_return(status: 200, body: '{"MessageID":123}', headers: { "Content-Type" => "application/json" })
+      .to_return(
+        status: 200,
+        body: '{"MessageID":123}',
+        headers: { "Content-Type" => "application/json" }
+      )
   end
 
   describe ".deliver" do

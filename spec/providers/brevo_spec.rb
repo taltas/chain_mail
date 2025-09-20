@@ -37,7 +37,11 @@ RSpec.describe ChainMail::Providers::Brevo do
         headers: headers,
         body: payload.to_json
       )
-      .to_return(status: 200, body: '{"message":"success"}', headers: { "Content-Type" => "application/json" })
+      .to_return(
+        status: 200,
+        body: '{"message":"success"}',
+        headers: { "Content-Type" => "application/json" }
+      )
   end
 
   it "sends correct payload to Brevo API" do
@@ -75,7 +79,11 @@ RSpec.describe ChainMail::Providers::Brevo do
           headers: headers,
           body: payload.to_json
         )
-        .to_return(status: 200, body: '{"message":"success"}', headers: { "Content-Type" => "application/json" })
+        .to_return(
+          status: 200,
+          body: '{"message":"success"}',
+          headers: { "Content-Type" => "application/json" }
+        )
     end
 
     it "sends correct payload for different mail object" do
