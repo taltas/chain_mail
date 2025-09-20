@@ -1,13 +1,23 @@
 AllCops:
-  TargetRubyVersion: 2.6
-
-Style/StringLiterals:
-  Enabled: true
-  EnforcedStyle: double_quotes
-
-Style/StringLiteralsInInterpolation:
-  Enabled: true
-  EnforcedStyle: double_quotes
+  TargetRubyVersion: 3.1
+  NewCops: enable
+  Exclude:
+    - "db/**/*"
+    - "node_modules/**/*"
+    - "vendor/**/*"
 
 Layout/LineLength:
-  Max: 120
+  Max: 100
+
+Metrics/BlockLength:
+  Exclude:
+    - "spec/**/*"
+
+Metrics/MethodLength:
+  Max: 35
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+Style/Documentation:
+  Enabled: false
