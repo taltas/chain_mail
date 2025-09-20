@@ -10,7 +10,12 @@ module ChainMail
           subject: mail.subject,
           htmlContent: mail.body.decoded
         }
-        headers = { "api-key" => creds[:api_key], "Content-Type" => "application/json" }
+        headers = {
+          "api-key" => creds[:api_key],
+          "Content-Type" => "application/json"
+        }
+
+        headers.merge!("X-Sib-Sandbox" => "drop") if creds[:sandbox]
         post_json("https://api.brevo.com/v3/smtp/email", headers, payload)
       end
     end
