@@ -2,6 +2,7 @@ PATH
   remote: .
   specs:
     chain_mail (0.1.0)
+      aws-sdk-ses (~> 1.0)
 
 GEM
   remote: https://rubygems.org/

@@ -34,4 +34,5 @@ Gem::Specification.new do |spec|
 
   # Add dependencies here
   # spec.add_dependency "rails", ">= 6.0"
+  spec.add_dependency "aws-sdk-ses", "~> 1.0"
 end

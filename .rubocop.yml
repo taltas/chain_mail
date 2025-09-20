@@ -12,6 +12,7 @@ Layout/LineLength:
 Metrics/BlockLength:
   Exclude:
     - "spec/**/*"
+    - "chain_mail.gemspec"
 
 Metrics/MethodLength:
   Max: 35
