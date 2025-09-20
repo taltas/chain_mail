@@ -1,0 +1,9 @@
+repos:
+  - repo: https://github.com/rubocop/rubocop
+    rev: v1.80.2 # Use the RuboCop version you want
+    hooks:
+      - id: rubocop
+        name: RuboCop
+        entry: rvm 3.3.0 do rubocop
+        language: system
+        types: [ruby]
