@@ -6,6 +6,7 @@ require "chain_mail/configuration"
 module ChainMail
   autoload :Delivery, "chain_mail/delivery"
   autoload :Railtie, "chain_mail/railtie" if defined?(Rails)
+
   module Providers
     autoload :Base, "chain_mail/providers/base"
     autoload :Brevo, "chain_mail/providers/brevo"
