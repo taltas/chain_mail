@@ -2,10 +2,10 @@
 
 require "chain_mail/version"
 require "chain_mail/configuration"
+require "chain_mail/railtie" if defined?(Rails::Railtie)
 
 module ChainMail
   autoload :Delivery, "chain_mail/delivery"
-  autoload :Railtie, "chain_mail/railtie" if defined?(Rails)
 
   module Providers
     autoload :Base, "chain_mail/providers/base"
