@@ -19,21 +19,38 @@ module ChainMail
     private
 
     def validate_mail!(mail)
-      required_methods = %i[to from subject body]
-      missing = required_methods.reject { |m| mail.respond_to?(m) }
+      required_fields = %i[to from subject body]
+      missing = required_fields.select do |field|
+        !mail.respond_to?(field) ||
+          (value = mail.send(field)).nil? ||
+          (value.respond_to?(:empty?) && value.empty?)
+      end
       return if missing.empty?
 
-      raise ArgumentError, "Mail object missing: #{missing.join(', ')}"
+      raise "Mail object missing or blank: #{missing.join(', ')}"
     end
 
     def try_providers(mail)
+      providers = ChainMail.config.providers
+      validate_providers!(providers)
+
       results = []
-      ChainMail.config.providers.each do |provider|
+      providers.each do |provider|
         results.concat(try_single_provider(mail, provider))
-        # Stop trying more providers if one is successful.
-        return results if results.any? { |r| r[:success] }
+        return results if successful?(results)
       end
       results
+    end
+
+    def validate_providers!(providers)
+      raise "ChainMail: No providers configured" if providers.nil? || providers.empty?
+      return if providers.all? { |p| p.is_a?(Hash) && p.size == 1 }
+
+      raise "ChainMail: Provider config must be a hash with one key-value pair"
+    end
+
+    def successful?(results)
+      results.any? { |r| r[:success] }
     end
 
     def try_single_provider(mail, provider)
