@@ -102,10 +102,16 @@ RSpec.describe ChainMail::Providers::SendGrid do
   context "when credentials are missing" do
     let(:creds) { {} }
 
-    it "raises an error for missing api_key" do
+    it "raises a KeyError for missing api_key" do
       expect do
         described_class.deliver(mail, creds)
-      end.to raise_error(KeyError).or raise_error(StandardError)
+      end.to raise_error(KeyError)
+    end
+
+    it "raises a StandardError for missing api_key" do
+      expect do
+        described_class.deliver(mail, creds)
+      end.to raise_error(StandardError)
     end
   end
 
