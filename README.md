@@ -169,22 +169,20 @@ ChainMail.configure do |config|
 end
 ```
 
-### Multiple Providers with Priorities
+### Multiple Providers by Priority (send_grid -> mailgun -> ses)
 
 ```ruby
 ChainMail.configure do |config|
   config.providers = [
-    { send_grid: { api_key: ENV["SENDGRID_API_KEY"], priority: 1 } },
+    { send_grid: { api_key: ENV["SENDGRID_API_KEY"]} },
     { mailgun: {
         domain: ENV["MAILGUN_DOMAIN"],
-        api_key: ENV["MAILGUN_API_KEY"],
-        priority: 2
+        api_key: ENV["MAILGUN_API_KEY"]
       } },
     { ses: {
         region: ENV["AWS_REGION"],
         access_key_id: ENV["AWS_ACCESS_KEY_ID"],
-        secret_access_key: ENV["AWS_SECRET_ACCESS_KEY"],
-        priority: 3
+        secret_access_key: ENV["AWS_SECRET_ACCESS_KEY"]
       } }
   ]
 end
