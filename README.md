@@ -211,6 +211,10 @@ ChainMail.config.providers = [
 
 - API keys and credentials should be stored securely, e.g. using environment variables.
 
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=chain_mail/chain_mail&type=Date)](https://www.star-history.com/#chain_mail/chain_mail&Date)
+
 ## Development
 
 Check out the repo and start developing!
