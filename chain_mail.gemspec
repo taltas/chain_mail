@@ -13,13 +13,13 @@ Gem::Specification.new do |spec|
     "ChainMail provides a unified interface for sending transactional emails through " \
     "multiple providers (SendGrid, Postmark, Mailgun, etc.) " \
     "with automatic failover and Rails integration."
-  spec.homepage    = "https://github.com/torayaltas/chain_mail"
-  spec.required_ruby_version = ">= 3.1.0"
+  spec.homepage    = "https://github.com/taltas/chain_mail"
+  spec.required_ruby_version = ">= 3.0.0"
 
   spec.metadata["allowed_push_host"] = "https://rubygems.org"
   spec.metadata["homepage_uri"]      = spec.homepage
-  spec.metadata["source_code_uri"]   = "https://github.com/torayaltas/chain_mail"
-  spec.metadata["changelog_uri"]     = "https://github.com/torayaltas/chain_mail/blob/main/CHANGELOG.md"
+  spec.metadata["source_code_uri"]   = "https://github.com/taltas/chain_mail"
+  spec.metadata["changelog_uri"]     = "https://github.com/taltas/chain_mail/blob/main/CHANGELOG.md"
   spec.metadata["rubygems_mfa_required"] = "true"
 
   spec.files = Dir.chdir(__dir__) do

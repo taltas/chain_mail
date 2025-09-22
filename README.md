@@ -1,6 +1,6 @@
 ![ChainMail Logo](https://raw.githubusercontent.com/taltas/chain_mail/main/assets/images/logo.png)
 
-# ChainMail
+# chain_mail
 
 [![Coverage Status](https://coveralls.io/repos/github/taltas/chain_mail/badge.svg?branch=main)](https://coveralls.io/github/taltas/chain_mail?branch=main)
 [![Ruby](https://img.shields.io/badge/ruby-3.0+-blue.svg)](https://www.ruby-lang.org)
@@ -8,9 +8,9 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![RuboCop](https://img.shields.io/badge/rubocop-enabled-brightgreen.svg)](https://github.com/rubocop/rubocop)
 
-ChainMail is a Ruby gem that ensures your transactional **emails never fail** by automatically switching between multiple email providers (SendGrid, Postmark, Mailgun, SES, etc.) when one fails to send. No more lost emails, no more manual intervention required.
+`chain_mail` is a Ruby gem that ensures your transactional **emails never fail** by automatically switching between multiple email providers (SendGrid, Postmark, Mailgun, SES, etc.) when one fails to send. No more lost emails, no more manual intervention required.
 
-## Why ChainMail?
+## Why chain_mail?
 
 - **Zero Downtime**: If one provider fails, emails automatically route to the next available provider
 - **Easy Setup**: Simple configuration with familiar Rails patterns
@@ -84,7 +84,7 @@ end
 
 ## Supported Email Providers
 
-ChainMail includes built-in support for the following email providers. Here's how to configure each one in your Rails initializer:
+`chain_mail` includes built-in support for the following email providers. Here's how to configure each one in your Rails initializer:
 
 ### Amazon SES
 
