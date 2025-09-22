@@ -2,9 +2,9 @@
 
 [![Coverage Status](https://coveralls.io/repos/github/taltas/chain_mail/badge.svg?branch=main)](https://coveralls.io/github/taltas/chain_mail?branch=main)
 [![Ruby](https://img.shields.io/badge/ruby-3.0+-blue.svg)](https://www.ruby-lang.org)
-[![Build Status](https://github.com/taltas/chain_mail/workflows/CI/badge.svg)](https://github.com/taltas/chain_mail/actions)
+[![Build Status](https://github.com/taltas/chain_mail/workflows/Ruby/badge.svg)](https://github.com/taltas/chain_mail/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![RuboCop](https://github.com/taltas/chain_mail/workflows/RuboCop/badge.svg)](https://github.com/torayaltas/chain_mail/actions)
+[![RuboCop](https://img.shields.io/badge/rubocop-enabled-brightgreen.svg)](https://github.com/rubocop/rubocop)
 
 ChainMail is a Ruby gem that provides a unified interface for sending transactional emails through multiple providers (SendGrid, Postmark, Mailgun, SES, etc.) with automatic failover.
 
