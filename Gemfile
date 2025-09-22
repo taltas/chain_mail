@@ -12,7 +12,9 @@ gem "rubocop", "~> 1.21"
 
 group :test do
   gem "byebug"
+  gem "coveralls_reborn", "~> 0.28"
   gem "faraday", "~> 2.0"
   gem "rails"
+  gem "simplecov", "~> 0.22"
   gem "webmock", "~> 3.0"
 end

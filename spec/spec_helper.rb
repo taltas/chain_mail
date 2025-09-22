@@ -1,18 +1,11 @@
 # frozen_string_literal: true
 
+# Load support files
+require_relative "support/coverage"
+require_relative "support/webmock"
+require_relative "support/faraday_helper"
+
 require "rspec"
-require "webmock/rspec"
-require "faraday" # Optional, for Faraday stubs if needed
-
-# Block all real HTTP requests except those explicitly stubbed
-WebMock.disable_net_connect!(allow_localhost: true)
-
-# Optionally set up Faraday stubs for adapter specs
-module FaradaySpecHelper
-  def faraday_stub
-    Faraday::Adapter::Test::Stubs.new
-  end
-end
 
 RSpec.configure do |config|
   # Clean, idiomatic RSpec settings

@@ -5,7 +5,6 @@ AllCops:
     - "db/**/*"
     - "node_modules/**/*"
     - "vendor/**/*"
-    - "lib/chain_mail/helpers/sendpulse_api.rb"
 
 Layout/LineLength:
   Max: 100

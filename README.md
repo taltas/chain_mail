@@ -1,5 +1,7 @@
 # ChainMail
 
+[![Coverage Status](https://coveralls.io/repos/github/torayaltas/chain_mail/badge.svg?branch=main)](https://coveralls.io/github/torayaltas/chain_mail?branch=main)
+
 ChainMail is a Ruby gem that provides a unified interface for sending transactional emails through multiple providers (SendGrid, Postmark, Mailgun, SES, etc.) with automatic failover.
 
 ## Architecture

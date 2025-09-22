@@ -3,7 +3,7 @@
 require "net/http"
 require "json"
 require "base64"
-require "chain_mail/helpers/sendpulse_api"
+require_relative "../../../vendor/sendpulse/sendpulse_api"
 
 module ChainMail
   module Providers
