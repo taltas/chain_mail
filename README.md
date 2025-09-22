@@ -8,7 +8,14 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![RuboCop](https://img.shields.io/badge/rubocop-enabled-brightgreen.svg)](https://github.com/rubocop/rubocop)
 
-ChainMail is a Ruby gem that provides a unified interface for sending transactional emails through multiple providers (SendGrid, Postmark, Mailgun, SES, etc.) with automatic failover.
+ChainMail is a Ruby gem that ensures your transactional **emails never fail** by automatically switching between multiple email providers (SendGrid, Postmark, Mailgun, SES, etc.) when one fails to send. No more lost emails, no more manual intervention required.
+
+## Why ChainMail?
+
+- **Zero Downtime**: If one provider fails, emails automatically route to the next available provider
+- **Easy Setup**: Simple configuration with familiar Rails patterns
+- **Multiple Providers**: Built-in support for all major email services
+- **Error Aggregation**: Get detailed reports on any delivery issues
 
 ## Installation
 
@@ -61,16 +68,129 @@ class UserMailer < ApplicationMailer
     )
   end
 end
-
-# In config/environments/production.rb
-config.action_mailer.delivery_method = :chain_mail
 ```
+
+## Requirements
+
+- Ruby 3.0 or higher
+- Rails 6.0+ (for Rails integration)
+- Active email provider accounts (SendGrid, Postmark, etc.)
 
 ## Architecture
 
 - **Configuration:** Set up providers and credentials in an initializer or before sending.
 - **Delivery:** Handles failover, input validation, and error aggregation.
 - **Providers:** Each adapter implements a standardized interface and error handling.
+
+## Supported Email Providers
+
+ChainMail includes built-in support for the following email providers. Here's how to configure each one in your Rails initializer:
+
+### Amazon SES
+
+```ruby
+ChainMail.configure do |config|
+  config.providers = [
+    { ses: {
+        region: ENV["AWS_REGION"],
+        access_key_id: ENV["AWS_ACCESS_KEY_ID"],
+        secret_access_key: ENV["AWS_SECRET_ACCESS_KEY"]
+      } }
+  ]
+end
+```
+
+### Brevo (formerly Sendinblue)
+
+```ruby
+ChainMail.configure do |config|
+  config.providers = [
+    { brevo: {
+        api_key: ENV["BREVO_API_KEY"],
+        sandbox: ENV["BREVO_SANDBOX"] == "true" # optional
+      } }
+  ]
+end
+```
+
+### Mailgun
+
+```ruby
+ChainMail.configure do |config|
+  config.providers = [
+    { mailgun: {
+        domain: ENV["MAILGUN_DOMAIN"],
+        api_key: ENV["MAILGUN_API_KEY"]
+      } }
+  ]
+end
+```
+
+### OneSignal
+
+```ruby
+ChainMail.configure do |config|
+  config.providers = [
+    { one_signal: { api_key: ENV["ONESIGNAL_API_KEY"] } }
+  ]
+end
+```
+
+### Postmark
+
+```ruby
+ChainMail.configure do |config|
+  config.providers = [
+    { postmark: { api_key: ENV["POSTMARK_API_KEY"] } }
+  ]
+end
+```
+
+### SendGrid
+
+```ruby
+ChainMail.configure do |config|
+  config.providers = [
+    { send_grid: { api_key: ENV["SENDGRID_API_KEY"] } }
+  ]
+end
+```
+
+### SendPulse
+
+```ruby
+ChainMail.configure do |config|
+  config.providers = [
+    { send_pulse: {
+        client_id: ENV["SENDPULSE_CLIENT_ID"],
+        client_secret: ENV["SENDPULSE_CLIENT_SECRET"]
+      } }
+  ]
+end
+```
+
+### Multiple Providers with Priorities
+
+```ruby
+ChainMail.configure do |config|
+  config.providers = [
+    { send_grid: { api_key: ENV["SENDGRID_API_KEY"], priority: 1 } },
+    { mailgun: {
+        domain: ENV["MAILGUN_DOMAIN"],
+        api_key: ENV["MAILGUN_API_KEY"],
+        priority: 2
+      } },
+    { ses: {
+        region: ENV["AWS_REGION"],
+        access_key_id: ENV["AWS_ACCESS_KEY_ID"],
+        secret_access_key: ENV["AWS_SECRET_ACCESS_KEY"],
+        priority: 3
+      } }
+  ]
+end
+```
+
+**Note:** Always store API keys and credentials securely using environment variables. Providers are tried in the order listed - the first available provider will handle the email delivery.
 
 ## Provider Priorities & Dynamic Configuration
 
@@ -95,9 +215,7 @@ ChainMail.config.providers = [
 
 ## Development
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`.
+Check out the repo and start developing!
 
 ## Contributing
 
