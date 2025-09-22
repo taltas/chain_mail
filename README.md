@@ -1,3 +1,5 @@
+![ChainMail Logo](https://raw.githubusercontent.com/taltas/chain_mail/main/assets/images/logo.png)
+
 # ChainMail
 
 [![Coverage Status](https://coveralls.io/repos/github/taltas/chain_mail/badge.svg?branch=main)](https://coveralls.io/github/taltas/chain_mail?branch=main)
@@ -7,12 +9,6 @@
 [![RuboCop](https://img.shields.io/badge/rubocop-enabled-brightgreen.svg)](https://github.com/rubocop/rubocop)
 
 ChainMail is a Ruby gem that provides a unified interface for sending transactional emails through multiple providers (SendGrid, Postmark, Mailgun, SES, etc.) with automatic failover.
-
-## Architecture
-
-- **Configuration:** Set up providers and credentials in an initializer or before sending.
-- **Delivery:** Handles failover, input validation, and error aggregation.
-- **Providers:** Each adapter implements a standardized interface and error handling.
 
 ## Installation
 
@@ -69,6 +65,12 @@ end
 # In config/environments/production.rb
 config.action_mailer.delivery_method = :chain_mail
 ```
+
+## Architecture
+
+- **Configuration:** Set up providers and credentials in an initializer or before sending.
+- **Delivery:** Handles failover, input validation, and error aggregation.
+- **Providers:** Each adapter implements a standardized interface and error handling.
 
 ## Provider Priorities & Dynamic Configuration
 
