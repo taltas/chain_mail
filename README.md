@@ -213,7 +213,7 @@ ChainMail.config.providers = [
 
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=chain_mail/chain_mail&type=Date)](https://www.star-history.com/#chain_mail/chain_mail&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=taltas/chain_mail&type=Date)](https://www.star-history.com/#taltas/chain_mail&Date)
 
 ## Development
 
